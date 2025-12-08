@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 REPO_NAME="ghcr.io/itschurry"
 PROJECT_NAME="indy"
@@ -31,8 +31,4 @@ NC='\033[0m' # 기본 색상 (No Color)
 echo -e "${BLUE}Branch: ${NC}$git_head"
 echo -e "${GREEN}Tag: ${RED}$TAG${NC}"
 
-src_dir=$(pwd)
-workspace=$src_dir/..
-
-cd $workspace || true
-docker build --build-arg BUILD_TYPE=$TAG -t $REPO_NAME/$PROJECT_NAME:$TAG -f $src_dir/Dockerfile .
+docker build --build-arg BUILD_TYPE=$TAG --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg HOME=$HOME --build-arg USER=$USER -t $REPO_NAME/$PROJECT_NAME:$TAG -f Dockerfile .

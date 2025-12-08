@@ -53,9 +53,9 @@ docker run \
     -it \
     $ENVS \
     $VOLUMES \
-    --volume=$PWD:/indy_ws:rw \
     -e HOME=$HOME \
-    --workdir /indy_ws \
+    --volume=$PWD:$HOME/indy_ws:rw \
+    --workdir $HOME/indy_ws \
     --privileged \
     --ipc host \
     --net host \
